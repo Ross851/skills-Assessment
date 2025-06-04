@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft 365 Stack Skills Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0078d4 0%, #40e0d0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #0078d4;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #0078d4;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            padding: 12px 16px;
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0078d4;
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding: 5px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 120, 212, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tab:hover::before {
+            left: 100%;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 120, 212, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #0078d4 0%, #40e0d0 100%);
+            color: white;
+            padding: 20px 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .category-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-description {
+            font-size: 0.9em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card {
+            padding: 25px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: #f8f9fa;
+            padding-left: 30px;
+        }
+
+        .skill-card:hover::before {
+            background: linear-gradient(180deg, #0078d4 0%, #40e0d0 100%);
+        }
+
+        .skill-card:last-child {
+            border-bottom: none;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skill-name {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #0078d4;
+            margin-bottom: 8px;
+        }
+
+        .skill-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .skill-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .meta-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cert-tag {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #1976d2;
+        }
+
+        .required-tag {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            color: #f57c00;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .assessment-block {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .assessment-block:hover {
+            border-color: #0078d4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 120, 212, 0.1);
+        }
+
+        .assessment-label {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #0078d4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .level-selector {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .level-btn {
+            width: 36px;
+            height: 36px;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .level-btn:hover {
+            border-color: #0078d4;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 120, 212, 0.2);
+        }
+
+        .level-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .level-btn.active {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: white;
+            border-color: #0078d4;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 120, 212, 0.3);
+        }
+
+        .competency-description {
+            font-size: 0.8em;
+            color: #666;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 50px;
+            border-left: 3px solid #0078d4;
+            line-height: 1.4;
+        }
+
+        .gap-indicator {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gap-indicator.negative {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left-color: #f44336;
+        }
+
+        .gap-text {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .gap-indicator.negative .gap-text {
+            color: #c62828;
+        }
+
+        .notes-section {
+            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #fbc02d;
+            margin-top: 15px;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .note-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .note-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: #f57f17;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .note-textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-size: 0.85em;
+            border: 2px solid #fff176;
+            background: white;
+        }
+
+        .note-textarea:focus {
+            border-color: #fbc02d;
+            box-shadow: 0 0 0 3px rgba(251, 192, 45, 0.2);
+        }
+
+        .summary-dashboard {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #0078d4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.05) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #0078d4;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #40e0d0 0%, #20b2aa 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(64, 224, 208, 0.4);
+        }
+
+        .analysis-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #0078d4;
+        }
+
+        .analysis-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .analysis-icon {
+            font-size: 2em;
+        }
+
+        .analysis-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #0078d4;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .assessment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-header {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Microsoft 365 Stack Skills Assessment</h1>
+            <p>Comprehensive evaluation for Power Platform, Microsoft 365, and API development professionals</p>
+        </div>
+
+        <div class="profile-section">
+            <h3 style="color: #0078d4; margin-bottom: 20px;">Profile Information</h3>
+            <div class="profile-grid">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="employeeName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Manager Name</label>
+                    <input type="text" id="managerName" placeholder="Manager's name">
+                </div>
+                <div class="form-group">
+                    <label>Current Role</label>
+                    <select id="currentRole">
+                        <option value="">Select your current role</option>
+                        <option value="junior-365">Junior 365 Developer</option>
+                        <option value="365-developer">365 Stack Developer</option>
+                        <option value="senior-365">Senior 365 Developer</option>
+                        <option value="365-architect">365 Solutions Architect</option>
+                        <option value="technical-lead">Technical Lead</option>
+                        <option value="principal-architect">Principal Architect</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" id="department" placeholder="e.g., IT, Digital Transformation">
+                </div>
+                <div class="form-group">
+                    <label>Assessment Date</label>
+                    <input type="text" id="assessmentDate" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Career Goal</label>
+                    <select id="careerGoal">
+                        <option value="">Select your target role</option>
+                        <option value="senior-365">Senior 365 Developer</option>
+                        <option value="365-architect">365 Solutions Architect</option>
+                        <option value="technical-lead">Technical Lead</option>
+                        <option value="principal-architect">Principal Architect</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-dashboard">
+            <h3 style="color: #0078d4; margin-bottom: 20px;">Assessment Summary</h3>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="metric-value" id="totalSkills">0</div>
+                    <div class="metric-label">Skills Assessed</div>
+                </div>
+                <div class="summary-card">
+                    <div class="metric-value" id="avgSelfRating">0.0</div>
+                    <div class="metric-label">Avg Self Rating</div>
+                </div>
+                <div class="summary-card">
+                    <div class="metric-value" id="avgManagerRating">0.0</div>
+                    <div class="metric-label">Avg Manager Rating</div>
+                </div>
+                <div class="summary-card">
+                    <div class="metric-value" id="developmentAreas">0</div>
+                    <div class="metric-label">Development Areas</div>
+                </div>
+                <div class="summary-card">
+                    <div class="metric-value" id="strengths">0</div>
+                    <div class="metric-label">Key Strengths</div>
+                </div>
+                <div class="summary-card">
+                    <div class="metric-value" id="readiness">0%</div>
+                    <div class="metric-label">Role Readiness</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs"></div>
+
+        <div id="analysis-tab" class="tab-content">
+            <div class="analysis-section">
+                <div class="analysis-header">
+                    <span class="analysis-icon">📊</span>
+                    <h3 class="analysis-title">Skills Gap Analysis</h3>
+                </div>
+                <div id="gapAnalysis">Complete your assessment to see detailed gap analysis.</div>
+            </div>
+
+            <div class="analysis-section">
+                <div class="analysis-header">
+                    <span class="analysis-icon">💪</span>
+                    <h3 class="analysis-title">Core Strengths</h3>
+                </div>
+                <div id="strengthsAnalysis">Your key strengths will appear here after assessment.</div>
+            </div>
+
+            <div class="analysis-section">
+                <div class="analysis-header">
+                    <span class="analysis-icon">🎯</span>
+                    <h3 class="analysis-title">Development Roadmap</h3>
+                </div>
+                <div id="developmentRoadmap">Set your career goal to see your personalized development path.</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="generateDetailedReport()">📄 Generate Full Report</button>
+                <button class="btn btn-secondary" onclick="saveAssessment()">💾 Save Assessment</button>
+                <button class="btn btn-primary" onclick="exportToPDF()">📑 Export to PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Assessment data storage
+let assessmentData = {}; // Stores self and manager ratings per skill ID
+let skillNotes = {};     // Stores employee and manager notes per skill ID
+let currentRole = '';
+let careerGoal = '';
+
+// Define global functions for inline handlers in skill cards
+// These functions are called directly from the HTML elements.
+function updateAssessment(skillId, assessorType, level) {
+    if (!assessmentData[skillId]) {
+        assessmentData[skillId] = { self: 0, manager: 0 };
+    }
+    assessmentData[skillId][assessorType] = level;
+    
+    // Re-render only the specific skill card to update its state and description
+    renderSpecificSkillCard(skillId); 
+    updateSummary();
+    updateAnalysis();
+}
+
+function updateNote(skillId, noteType, value) {
+    if (!skillNotes[skillId]) {
+        skillNotes[skillId] = { employee: '', manager: '' };
+    }
+    skillNotes[skillId][noteType] = value;
+}
+
+// Skills framework specific to Microsoft 365 stack
+const m365SkillsFramework = {
+    'power-apps': {
+        title: 'Power Apps Development',
+        description: 'Canvas apps, model-driven apps, and component development',
+        categories: {
+            'Canvas App Development': [
+                {
+                    id: 'canvas-app-design-ux', // Unique ID
+                    skill: 'Canvas App Design & UX',
+                    description: 'Create intuitive, responsive canvas applications with excellent user experience',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-100', 'PL-200'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of canvas apps and simple controls',
+                        2: 'Create functional apps with galleries, forms, and basic navigation',
+                        3: 'Advanced controls, responsive design, and complex formulas',
+                        4: 'Performance optimization, reusable components, and accessibility',
+                        5: 'Architect complex enterprise canvas solutions with best practices'
+                    }
+                },
+                {
+                    id: 'power-fx-formulas', // Unique ID
+                    skill: 'Power Fx Formulas',
+                    description: 'Master Power Fx language for complex business logic and data manipulation',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic formulas and simple calculations',
+                        2: 'Collections, variables, and conditional logic',
+                        3: 'Complex formulas with delegation awareness',
+                        4: 'Advanced patterns, error handling, and performance optimization',
+                        5: 'Expert-level formula architecture and custom functions'
+                    }
+                },
+                {
+                    id: 'model-driven-apps', // Unique ID
+                    skill: 'Model-Driven Apps',
+                    description: 'Build data-centric applications with forms, views, and business process flows',
+                    requirements: {
+                        'junior-365': 1,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-200', 'PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of model-driven concepts',
+                        2: 'Create simple apps with standard entities',
+                        3: 'Custom entities, relationships, and business rules',
+                        4: 'Complex security models and custom UI components',
+                        5: 'Enterprise architecture with advanced customizations'
+                    }
+                }
+            ],
+            'Advanced Components': [
+                {
+                    id: 'power-apps-component-framework-pcf', // Unique ID
+                    skill: 'Power Apps Component Framework (PCF)',
+                    description: 'Build custom components using TypeScript and modern web frameworks',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    certifications: ['PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of PCF concepts',
+                        2: 'Simple custom controls with basic functionality',
+                        3: 'Complex components with external libraries',
+                        4: 'Advanced patterns, performance optimization, and testing',
+                        5: 'Architect reusable component libraries'
+                    }
+                },
+                {
+                    id: 'custom-pages-canvas-component-library',
+                    skill: 'Custom Pages & Canvas Component Library',
+                    description: 'Develop custom pages for Model-driven apps and manage reusable canvas components.',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of custom pages and component types.',
+                        2: 'Create simple custom pages and basic component libraries.',
+                        3: 'Develop complex custom pages with data integration; manage component versions.',
+                        4: 'Optimize custom page performance; design advanced component architectures.',
+                        5: 'Lead custom page and component library strategy across enterprise solutions.'
+                    }
+                }
+            ]
+        }
+    },
+    'power-automate': {
+        title: 'Power Automate',
+        description: 'Cloud flows, desktop flows, and business process automation',
+        categories: {
+            'Cloud Flows': [
+                {
+                    id: 'cloud-flow-development', // Unique ID
+                    skill: 'Cloud Flow Development',
+                    description: 'Design and implement automated workflows across cloud services',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-200', 'PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic automated flows with standard connectors',
+                        2: 'Approval workflows and scheduled flows',
+                        3: 'Complex flows with error handling and parallel branches',
+                        4: 'Advanced patterns, custom connectors, and performance optimization',
+                        5: 'Enterprise automation architecture and governance'
+                    }
+                },
+                {
+                    id: 'expression-logic-functions', // Unique ID
+                    skill: 'Expression & Logic Functions',
+                    description: 'Master Power Automate expressions for data manipulation and complex logic',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic expressions and simple conditions',
+                        2: 'String manipulation and date functions',
+                        3: 'Complex expressions with arrays and JSON',
+                        4: 'Advanced patterns and custom expressions',
+                        5: 'Expert-level expression optimization'
+                    }
+                }
+            ],
+            'Desktop Flows (RPA)': [
+                {
+                    id: 'desktop-flows-rpa', // Unique ID
+                    skill: 'Desktop Flows (RPA)',
+                    description: 'Robotic Process Automation for legacy systems and desktop applications',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 3,
+                        'technical-lead': 3,
+                        'principal-architect': 3
+                    },
+                    certifications: ['PL-500'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic UI recording and simple automation',
+                        2: 'Desktop flows with error handling',
+                        3: 'Complex RPA scenarios with OCR and AI',
+                        4: 'Enterprise RPA deployment and monitoring',
+                        5: 'RPA center of excellence leadership'
+                    }
+                }
+            ],
+            'Advanced Automation': [
+                {
+                    id: 'business-process-flows', // Unique ID
+                    skill: 'Business Process Flows',
+                    description: 'Design guided business processes with stages and conditional branching',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of process flows',
+                        2: 'Simple linear process flows',
+                        3: 'Complex flows with branching and stages',
+                        4: 'Advanced customization with JavaScript',
+                        5: 'Enterprise process architecture'
+                    }
+                },
+                {
+                    id: 'ai-builder-integration',
+                    skill: 'AI Builder Integration',
+                    description: 'Integrate AI models (e.g., form processing, object detection) into Power Automate flows.',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['AI-102'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of AI Builder capabilities.',
+                        2: 'Use pre-built AI models in simple flows.',
+                        3: 'Train custom AI models; integrate with complex data scenarios.',
+                        4: 'Optimize AI model performance; troubleshoot AI Builder issues.',
+                        5: 'Design and implement advanced AI-driven automation solutions.'
+                    }
+                }
+            ]
+        }
+    },
+    'power-pages': {
+        title: 'Power Pages',
+        description: 'External-facing websites and portals',
+        categories: {
+            'Portal Development': [
+                {
+                    id: 'power-pages-site-design', // Unique ID
+                    skill: 'Power Pages Site Design',
+                    description: 'Build secure, responsive external-facing websites and portals',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic portal creation with templates',
+                        2: 'Custom pages with authentication',
+                        3: 'Advanced customization with Liquid templates',
+                        4: 'Complex security models and integrations',
+                        5: 'Enterprise portal architecture'
+                    }
+                },
+                {
+                    id: 'liquid-templates-web-templates', // Unique ID
+                    skill: 'Liquid Templates & Web Templates',
+                    description: 'Advanced portal customization using Liquid templating language',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 3,
+                        'technical-lead': 3,
+                        'principal-architect': 3
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic Liquid syntax understanding',
+                        2: 'Simple dynamic content and filters',
+                        3: 'Complex templates with FetchXML',
+                        4: 'Advanced patterns and performance optimization',
+                        5: 'Template architecture and reusability'
+                    }
+                },
+                {
+                    id: 'power-pages-security-configuration',
+                    skill: 'Power Pages Security Configuration',
+                    description: 'Implement robust security measures including web roles, table permissions, and authentication.',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of portal security concepts.',
+                        2: 'Configure web roles and basic table permissions.',
+                        3: 'Implement complex table permissions and content access policies.',
+                        4: 'Design custom authentication providers; troubleshoot security issues.',
+                        5: 'Architect enterprise-grade security models for Power Pages solutions.'
+                    }
+                }
+            ]
+        }
+    },
+    'dataverse': {
+        title: 'Dataverse & Data Management',
+        description: 'Data modeling, security, and integration',
+        categories: {
+            'Data Architecture': [
+                {
+                    id: 'dataverse-data-modeling', // Unique ID
+                    skill: 'Dataverse Data Modeling',
+                    description: 'Design efficient data schemas with tables, relationships, and business logic',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-200', 'PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of tables and columns',
+                        2: 'Create custom tables with relationships',
+                        3: 'Complex data models with calculated fields',
+                        4: 'Advanced patterns, virtual tables, and optimization',
+                        5: 'Enterprise data architecture and governance'
+                    }
+                },
+                {
+                    id: 'security-row-level-security', // Unique ID
+                    skill: 'Security & Row-Level Security',
+                    description: 'Implement comprehensive security models with roles, teams, and field security',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic security role understanding',
+                        2: 'Configure standard security roles',
+                        3: 'Complex security with teams and sharing',
+                        4: 'Field-level security and hierarchies',
+                        5: 'Enterprise security architecture'
+                    }
+                },
+                {
+                    id: 'dataverse-search-views', // Unique ID
+                    skill: 'Dataverse Search & Views',
+                    description: 'Optimize data retrieval with views, filters, and Dataverse search',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic view creation',
+                        2: 'Complex views with filters and sorting',
+                        3: 'Advanced find and FetchXML',
+                        4: 'Performance optimization and indexing',
+                        5: 'Search architecture and relevance tuning'
+                    }
+                }
+            ],
+            'Data Integration': [
+                {
+                    id: 'dataflows-data-integration', // Unique ID
+                    skill: 'Dataflows & Data Integration',
+                    description: 'ETL processes using Power Query and dataflows for data preparation',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic dataflow concepts',
+                        2: 'Simple data transformations',
+                        3: 'Complex M queries and scheduling',
+                        4: 'Advanced patterns and error handling',
+                        5: 'Enterprise data pipeline architecture'
+                    }
+                },
+                {
+                    id: 'azure-data-integration',
+                    skill: 'Azure Data Integration (e.g., Azure Data Factory)',
+                    description: 'Integrate Dataverse with external data sources using Azure data services.',
+                    requirements: {
+                        '365-developer': 1,
+                        'senior-365': 2,
+                        '365-architect': 3,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['DP-203'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of Azure data services.',
+                        2: 'Create simple data pipelines for import/export.',
+                        3: 'Design and implement complex data integration solutions with ADF.',
+                        4: 'Optimize data pipelines for performance and cost.',
+                        5: 'Architect hybrid data solutions involving Dataverse and Azure.'
+                    }
+                }
+            ],
+            'Performance & Optimization': [
+                {
+                    id: 'dataverse-performance-tuning',
+                    skill: 'Dataverse Performance Tuning',
+                    description: 'Optimize Dataverse solutions for performance, including queries, plugins, and custom code.',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Awareness of performance impact of common operations.',
+                        2: 'Identify basic performance bottlenecks in apps/flows.',
+                        3: 'Optimize FetchXML queries; understand plugin best practices.',
+                        4: 'Analyze and resolve complex performance issues; implement caching strategies.',
+                        5: 'Architect high-performance Dataverse solutions for large-scale deployments.'
+                    }
+                }
+            ]
+        }
+    },
+    'm365-integration': {
+        title: 'Microsoft 365 Integration',
+        description: 'SharePoint, Teams, Outlook, and Graph API integration',
+        categories: {
+            'SharePoint Integration': [
+                {
+                    id: 'sharepoint-integration', // Unique ID
+                    skill: 'SharePoint Integration',
+                    description: 'Integrate Power Platform with SharePoint lists, libraries, and sites',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic SharePoint list connections',
+                        2: 'Document libraries and metadata',
+                        3: 'Complex workflows and content types',
+                        4: 'Advanced patterns and performance',
+                        5: 'Enterprise content management architecture'
+                    }
+                },
+                {
+                    id: 'sharepoint-framework-spfx',
+                    skill: 'SharePoint Framework (SPFx)',
+                    description: 'Develop custom web parts and extensions for SharePoint Online using SPFx.',
+                    requirements: {
+                        '365-developer': 1,
+                        'senior-365': 2,
+                        '365-architect': 3,
+                        'technical-lead': 3,
+                        'principal-architect': 3
+                    },
+                    certifications: ['MS-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of SharePoint extensibility.',
+                        2: 'Develop simple SPFx web parts and extensions.',
+                        3: 'Integrate SPFx components with Power Platform and Azure functions.',
+                        4: 'Implement advanced SPFx solutions with React/Angular and PnP libraries.',
+                        5: 'Architect large-scale SPFx solutions with robust deployment practices.'
+                    }
+                }
+            ],
+            'Teams Integration': [
+                {
+                    id: 'teams-integration', // Unique ID
+                    skill: 'Teams Integration',
+                    description: 'Embed Power Platform solutions in Microsoft Teams',
+                    requirements: {
+                        'junior-365': 1,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    certifications: ['MS-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic app embedding in Teams',
+                        2: 'Teams tabs and personal apps',
+                        3: 'Bots and messaging extensions',
+                        4: 'Advanced Teams platform features',
+                        5: 'Teams solution architecture'
+                    }
+                }
+            ],
+            'Graph API': [
+                {
+                    id: 'microsoft-graph-api', // Unique ID
+                    skill: 'Microsoft Graph API',
+                    description: 'Leverage Graph API for advanced Microsoft 365 integration',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['MS-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic Graph API concepts',
+                        2: 'Simple API calls and authentication',
+                        3: 'Complex queries and batch operations',
+                        4: 'Advanced patterns and webhooks',
+                        5: 'Enterprise Graph API architecture'
+                    }
+                }
+            ],
+            'Exchange Online & Outlook Integration': [
+                {
+                    id: 'exchange-online-outlook-integration',
+                    skill: 'Exchange Online & Outlook Integration',
+                    description: 'Develop solutions integrating with Exchange Online and Outlook for mail, calendar, and contacts.',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['MS-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic ability to send emails from flows/apps.',
+                        2: 'Automate calendar events and contact management.',
+                        3: 'Implement complex mail processing and folder automation.',
+                        4: 'Utilize advanced Graph API calls for email/calendar manipulation.',
+                        5: 'Architect enterprise solutions involving deep Exchange/Outlook integration.'
+                    }
+                }
+            ]
+        }
+    },
+    'api-development': {
+        title: 'API Development',
+        description: 'Custom connectors, web APIs, and integration patterns',
+        categories: {
+            'Custom Connectors': [
+                {
+                    id: 'custom-connector-development', // Unique ID
+                    skill: 'Custom Connector Development',
+                    description: 'Build custom connectors for third-party API integration',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic connector concepts',
+                        2: 'Simple REST API connectors',
+                        3: 'OAuth authentication and pagination',
+                        4: 'Advanced features and error handling',
+                        5: 'Enterprise connector strategy'
+                    }
+                }
+            ],
+            'Web API Development': [
+                {
+                    id: 'web-api-development', // Unique ID
+                    skill: 'Web API Development',
+                    description: 'Design and implement RESTful APIs for Power Platform integration',
+                    requirements: {
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic REST concepts',
+                        2: 'Simple API endpoints',
+                        3: 'Authentication and security',
+                        4: 'API versioning and documentation',
+                        5: 'Enterprise API architecture'
+                    }
+                }
+            ],
+            'Integration Patterns': [
+                {
+                    id: 'dataverse-web-api', // Unique ID
+                    skill: 'Dataverse Web API',
+                    description: 'Master Dataverse Web API for advanced operations and integrations',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic CRUD operations',
+                        2: 'Complex queries with OData',
+                        3: 'Batch operations and functions',
+                        4: 'Advanced patterns and performance',
+                        5: 'API governance and best practices'
+                    }
+                }
+            ],
+            'Azure API Management': [
+                {
+                    id: 'azure-api-management',
+                    skill: 'Azure API Management',
+                    description: 'Publish, secure, transform, and monitor APIs using Azure API Management.',
+                    requirements: {
+                        '365-developer': 1,
+                        'senior-365': 2,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 5
+                    },
+                    certifications: ['AZ-204', 'AZ-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of API gateways.',
+                        2: 'Publish simple APIs; configure basic policies.',
+                        3: 'Implement advanced policies (e.g., caching, rate limiting, security).',
+                        4: 'Design API architectures for scale and resilience; integrate with CI/CD.',
+                        5: 'Lead API strategy and governance across complex enterprise landscapes.'
+                    }
+                }
+            ]
+        }
+    },
+    'governance': {
+        title: 'Governance & ALM',
+        description: 'Application lifecycle management, DevOps, and governance',
+        categories: {
+            'ALM & DevOps': [
+                {
+                    id: 'solution-management', // Unique ID
+                    skill: 'Solution Management',
+                    description: 'Manage solutions, dependencies, and deployment strategies',
+                    requirements: {
+                        '365-developer': 2,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic solution concepts',
+                        2: 'Solution packaging and deployment',
+                        3: 'Managed solutions and versioning',
+                        4: 'Complex ALM with dependencies',
+                        5: 'Enterprise ALM strategy'
+                    }
+                },
+                {
+                    id: 'power-platform-devops', // Unique ID
+                    skill: 'Power Platform DevOps',
+                    description: 'Implement CI/CD pipelines for Power Platform solutions',
+                    requirements: {
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    certifications: ['PL-400', 'AZ-400'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic version control understanding',
+                        2: 'Manual deployment pipelines',
+                        3: 'Automated CI/CD with Azure DevOps',
+                        4: 'Advanced patterns with testing',
+                        5: 'Enterprise DevOps transformation'
+                    }
+                }
+            ],
+            'Governance': [
+                {
+                    id: 'power-platform-coe-governance', // Unique ID
+                    skill: 'Power Platform CoE & Governance',
+                    description: 'Establish Center of Excellence and governance frameworks',
+                    requirements: {
+                        'senior-365': 3,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-600'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic governance concepts',
+                        2: 'DLP policies and environment management',
+                        3: 'CoE toolkit implementation',
+                        4: 'Advanced governance automation',
+                        5: 'Enterprise governance strategy'
+                    }
+                }
+            ],
+            'Security & Compliance': [
+                {
+                    id: 'data-loss-prevention-dlp',
+                    skill: 'Data Loss Prevention (DLP) Policies',
+                    description: 'Design and implement DLP policies to prevent sensitive data leakage across Power Platform.',
+                    requirements: {
+                        '365-developer': 1,
+                        'senior-365': 2,
+                        '365-architect': 4,
+                        'technical-lead': 3,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PL-600', 'MS-102'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Basic understanding of data sensitivity.',
+                        2: 'Implement simple DLP policies for common connectors.',
+                        3: 'Design complex DLP policies with custom data classifications.',
+                        4: 'Audit and fine-tune DLP policies; integrate with compliance frameworks.',
+                        5: 'Lead enterprise DLP strategy and enforcement for Power Platform.'
+                    }
+                },
+                {
+                    id: 'security-and-compliance-center',
+                    skill: 'Microsoft 365 Security & Compliance Center',
+                    description: 'Manage security, compliance, and privacy settings within the Microsoft 365 ecosystem.',
+                    requirements: {
+                        '365-developer': 1,
+                        'senior-365': 2,
+                        '365-architect': 3,
+                        'technical-lead': 3,
+                        'principal-architect': 4
+                    },
+                    certifications: ['SC-200', 'SC-300'],
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Awareness of basic M365 security features.',
+                        2: 'Navigate the compliance center; assist with basic audits.',
+                        3: 'Configure retention policies, eDiscovery, and sensitivity labels.',
+                        4: 'Implement advanced compliance features; respond to data requests.',
+                        5: 'Design and implement a comprehensive M365 security and compliance strategy.'
+                    }
+                }
+            ],
+            'Training & Adoption': [
+                {
+                    id: 'user-training-and-support',
+                    skill: 'User Training & Support',
+                    description: 'Develop and deliver training materials and provide ongoing support for Power Platform users.',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 3,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'No experience',
+                        1: 'Ability to answer basic user questions.',
+                        2: 'Create simple user guides and FAQs.',
+                        3: 'Deliver group training sessions; manage a support queue.',
+                        4: 'Design comprehensive training programs; implement self-service support portals.',
+                        5: 'Lead user adoption strategies and community building initiatives.'
+                    }
+                }
+            ]
+        }
+    },
+    'soft-skills-professional-development': {
+        title: 'Soft Skills & Professional Development',
+        description: 'Non-technical skills essential for effective collaboration and career growth.',
+        categories: {
+            'Communication & Collaboration': [
+                {
+                    id: 'active-listening',
+                    skill: 'Active Listening',
+                    description: 'Ability to fully concentrate on, understand, respond to, and remember what is being said.',
+                    requirements: {
+                        'junior-365': 3,
+                        '365-developer': 4,
+                        'senior-365': 5,
+                        '365-architect': 5,
+                        'technical-lead': 5,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'Rarely listens, often interrupts.',
+                        1: 'Listens selectively, may miss key details.',
+                        2: 'Listens to understand, but may struggle with complex or emotional conversations.',
+                        3: 'Actively listens, asks clarifying questions, and provides relevant feedback.',
+                        4: 'Masterful active listener, builds strong rapport and trust through listening.',
+                        5: 'Coaches others on active listening, demonstrates empathy and deep understanding.'
+                    }
+                },
+                {
+                    id: 'technical-documentation',
+                    skill: 'Technical Documentation & Writing',
+                    description: 'Create clear, concise, and accurate documentation for technical solutions and processes.',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 4,
+                        'principal-architect': 4
+                    },
+                    competencyLevels: {
+                        0: 'Avoids documentation; unclear writing.',
+                        1: 'Produces basic notes, often incomplete.',
+                        2: 'Creates functional documentation for simple tasks, may lack clarity.',
+                        3: 'Produces clear, well-structured documentation for complex solutions.',
+                        4: 'Develops comprehensive, user-friendly documentation and standards.',
+                        5: 'Defines organizational documentation standards; mentors others in technical writing.'
+                    }
+                },
+                {
+                    id: 'presentation-skills',
+                    skill: 'Presentation & Public Speaking',
+                    description: 'Effectively convey complex technical information to diverse audiences.',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 5,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'Avoids presentations; struggles with clarity.',
+                        1: 'Delivers basic information; lacks engagement.',
+                        2: 'Can present prepared content; some audience interaction.',
+                        3: 'Delivers engaging presentations; handles questions effectively.',
+                        4: 'Tailors content to audience; inspires and persuades.',
+                        5: 'Masterful presenter; commands attention, influences strategy through communication.'
+                    }
+                }
+            ],
+            'Problem Solving & Critical Thinking': [
+                {
+                    id: 'analytical-thinking',
+                    skill: 'Analytical Thinking & Problem Solving',
+                    description: 'Ability to identify, analyze, and resolve complex technical and business problems.',
+                    requirements: {
+                        'junior-365': 3,
+                        '365-developer': 4,
+                        'senior-365': 5,
+                        '365-architect': 5,
+                        'technical-lead': 5,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'Struggles to identify root causes.',
+                        1: 'Identifies obvious problems; needs guidance for solutions.',
+                        2: 'Analyzes simple problems; proposes straightforward solutions.',
+                        3: 'Analyzes complex problems, identifies root causes, and proposes multiple solutions.',
+                        4: 'Systematically approaches problems, anticipates issues, and devises innovative solutions.',
+                        5: 'Solves highly ambiguous and critical problems, sets strategic problem-solving approaches.'
+                    }
+                }
+            ],
+            'Leadership & Mentorship': [
+                {
+                    id: 'mentorship-and-coaching',
+                    skill: 'Mentorship & Coaching',
+                    description: 'Guide and develop less experienced team members.',
+                    requirements: {
+                        'junior-365': 1,
+                        '365-developer': 2,
+                        'senior-365': 4,
+                        '365-architect': 4,
+                        'technical-lead': 5,
+                        'principal-architect': 5
+                    },
+                    competencyLevels: {
+                        0: 'Does not engage in mentoring.',
+                        1: 'Offers occasional advice; lacks structured guidance.',
+                        2: 'Provides informal guidance; helps with specific tasks.',
+                        3: 'Actively mentors junior colleagues; shares knowledge and best practices.',
+                        4: 'Develops formal mentorship programs; coaches on career growth.',
+                        5: 'Builds a culture of continuous learning and mentorship across teams.'
+                    }
+                }
+            ],
+            'Project Management Fundamentals': [
+                {
+                    id: 'requirements-gathering',
+                    skill: 'Requirements Gathering & Analysis',
+                    description: 'Elicit, document, and analyze business and technical requirements.',
+                    requirements: {
+                        'junior-365': 2,
+                        '365-developer': 3,
+                        'senior-365': 4,
+                        '365-architect': 5,
+                        'technical-lead': 4,
+                        'principal-architect': 5
+                    },
+                    certifications: ['CBAP'], // Example non-MS cert
+                    competencyLevels: {
+                        0: 'Struggles to understand project needs.',
+                        1: 'Identifies basic requirements; needs help with detailed analysis.',
+                        2: 'Gathers clear requirements for simple features; performs basic analysis.',
+                        3: 'Elicits and documents comprehensive requirements for complex solutions; performs detailed analysis.',
+                        4: 'Leads requirements workshops; identifies hidden needs and resolves conflicts.',
+                        5: 'Defines organizational standards for requirements management; leads strategic discovery.'
+                    }
+                },
+                {
+                    id: 'project-planning-execution',
+                    skill: 'Project Planning & Execution (Agile/Scrum)',
+                    description: 'Plan, execute, and monitor projects, often using Agile methodologies.',
+                    requirements: {
+                        'junior-365': 1,
+                        '365-developer': 2,
+                        'senior-365': 3,
+                        '365-architect': 4,
+                        'technical-lead': 5,
+                        'principal-architect': 5
+                    },
+                    certifications: ['PSM I', 'CSM'], // Example non-MS cert
+                    competencyLevels: {
+                        0: 'No involvement in project planning.',
+                        1: 'Understands basic project phases; follows simple tasks.',
+                        2: 'Contributes to task breakdown and estimation; tracks personal progress.',
+                        3: 'Plans and executes small to medium projects; participates in Agile ceremonies.',
+                        4: 'Manages complex projects end-to-end; coaches agile practices.',
+                        5: 'Leads multi-team programs; drives organizational adoption of project methodologies.'
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// Global function to find a skill by its ID
+function findSkillById(skillId) {
+    for (const categoryKey in m365SkillsFramework) {
+        const framework = m365SkillsFramework[categoryKey];
+        for (const subcategoryName in framework.categories) {
+            const skills = framework.categories[subcategoryName];
+            const foundSkill = skills.find(skill => skill.id === skillId);
+            if (foundSkill) {
+                return foundSkill;
+            }
+        }
+    }
+    return null;
+}
+
+function initializeAssessment() {
+    document.getElementById('assessmentDate').value = new Date().toLocaleDateString();
+
+    const tabsContainer = document.querySelector('.tabs');
+    if (tabsContainer) {
+        // Clear existing tabs and re-add them based on the updated framework
+        tabsContainer.innerHTML = '';
+        
+        // Add all tabs from framework
+        Object.keys(m365SkillsFramework).forEach((key, index) => {
+            const tabButton = document.createElement('button');
+            tabButton.className = `tab ${index === 0 ? 'active' : ''}`;
+            tabButton.setAttribute('data-tab', key);
+            tabButton.textContent = m365SkillsFramework[key].title;
+            tabsContainer.appendChild(tabButton);
+        });
+        
+        // Add Analysis tab at the end
+        const analysisTab = document.createElement('button');
+        analysisTab.className = 'tab';
+        analysisTab.setAttribute('data-tab', 'analysis');
+        analysisTab.textContent = 'Analysis & Reports';
+        tabsContainer.appendChild(analysisTab);
+
+        tabsContainer.addEventListener('click', function(event) {
+            const clickedTab = event.target.closest('.tab');
+            if (!clickedTab) return;
+            
+            const tabName = clickedTab.getAttribute('data-tab');
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            clickedTab.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const targetContent = document.getElementById(`${tabName}-tab`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            if (tabName === 'analysis') {
+                updateAnalysis();
+            }
+        });
+    }
+
+    // Add containers for new tab content dynamically if they don't exist
+    const containerDiv = document.querySelector('.container');
+    const analysisTab = document.getElementById('analysis-tab');
+    
+    if (containerDiv && analysisTab) {
+        Object.keys(m365SkillsFramework).forEach(key => {
+            const tabContentId = `${key}-tab`;
+            if (!document.getElementById(tabContentId)) {
+                const tabContentDiv = document.createElement('div');
+                tabContentDiv.id = tabContentId;
+                tabContentDiv.className = 'tab-content';
+                tabContentDiv.innerHTML = `<div id="${key}Skills"></div>`; // Inner div for skills
+                containerDiv.insertBefore(tabContentDiv, analysisTab); // Insert before analysis tab
+            }
+        });
+    }
+
+    document.getElementById('currentRole').addEventListener('change', function() {
+        currentRole = this.value;
+        renderAllSkills();
+        updateSummary();
+        updateAnalysis();
+    });
+
+    document.getElementById('careerGoal').addEventListener('change', function() {
+        careerGoal = this.value;
+        updateAnalysis();
+    });
+
+    renderAllSkills();
+    updateSummary();
+    
+    // Ensure the first tab content is visible
+    const firstTab = document.querySelector('.tab.active');
+    if (firstTab) {
+        const firstTabName = firstTab.getAttribute('data-tab');
+        const firstContent = document.getElementById(`${firstTabName}-tab`);
+        if (firstContent) {
+            firstContent.classList.add('active');
+        }
+    }
+}
+
+function renderAllSkills() {
+    Object.keys(m365SkillsFramework).forEach(category => {
+        renderSkillsForCategory(category);
+    });
+}
+
+function renderSkillsForCategory(categoryKey) {
+    const framework = m365SkillsFramework[categoryKey];
+    
+    // Map category keys to container IDs
+    const containerId = `${categoryKey}Skills`;
+    const container = document.getElementById(containerId);
+    
+    if (!container) {
+        console.error(`Container not found for category: ${categoryKey}, looking for ID: ${containerId}`);
+        return;
+    }
+
+    container.innerHTML = ''; // Clear existing content
+
+    Object.entries(framework.categories).forEach(([subcategoryName, skills]) => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'skill-category';
+        
+        let skillsHtml = '';
+        skills.forEach(skillData => {
+            if (shouldShowSkill(skillData)) {
+                skillsHtml += createSkillCardHtml(skillData);
+            }
+        });
+
+        if (skillsHtml) { // Only append if there are skills to show
+            categoryDiv.innerHTML = `
+                <div class="category-header">
+                    <div class="category-title">${subcategoryName}</div>
+                    <div class="category-description">${framework.description}</div>
+                </div>
+                ${skillsHtml}
+            `;
+            container.appendChild(categoryDiv);
+        }
+    });
+}
+
+// Function to re-render a specific skill card after an update
+function renderSpecificSkillCard(skillId) {
+    const skillElement = document.querySelector(`.skill-card[data-skill-id="${skillId}"]`);
+    if (skillElement) {
+        const skillData = findSkillById(skillId);
+        if (skillData) {
+            // Replace the entire skill card's content
+            skillElement.outerHTML = createSkillCardHtml(skillData);
+        }
+    }
+}
+
+function shouldShowSkill(skillData) {
+    if (!currentRole) return true; // Show all skills if no role is selected
+    // Only show skills that have requirements defined for the current role
+    return skillData.requirements && skillData.requirements.hasOwnProperty(currentRole);
+}
+
+function createSkillCardHtml(skillData) {
+    const skillId = skillData.id;
+    const currentSelfRating = assessmentData[skillId]?.self || 0;
+    const currentManagerRating = assessmentData[skillId]?.manager || 0;
+    const requiredLevel = currentRole ? (skillData.requirements[currentRole] || 0) : 0;
+    const gap = requiredLevel - currentSelfRating;
+
+    // Initialize data if not exists
+    if (!assessmentData[skillId]) {
+        assessmentData[skillId] = { self: 0, manager: 0 };
+    }
+    if (!skillNotes[skillId]) {
+        skillNotes[skillId] = { employee: '', manager: '' };
+    }
+
+    return `
+        <div class="skill-card" data-skill-id="${skillId}">
+            <div class="skill-header">
+                <div class="skill-info">
+                    <div class="skill-name">${skillData.skill}</div>
+                    <div class="skill-description">${skillData.description}</div>
+                    <div class="skill-meta">
+                        ${requiredLevel > 0 ? `<span class="meta-tag required-tag">Required: Level ${requiredLevel}</span>` : ''}
+                        ${skillData.certifications && skillData.certifications.length > 0 ? skillData.certifications.map(cert => 
+                            `<span class="meta-tag cert-tag">📜 ${cert}</span>`
+                        ).join('') : ''}
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-grid">
+                <div class="assessment-block">
+                    <div class="assessment-label">Self Assessment</div>
+                    <div class="level-selector">
+                        ${[0,1,2,3,4,5].map(level => `
+                            <button class="level-btn ${currentSelfRating === level ? 'active' : ''}" 
+                                    onclick="updateAssessment('${skillId}', 'self', ${level})">${level}</button>
+                        `).join('')}
+                    </div>
+                    <div class="competency-description">
+                        ${skillData.competencyLevels && skillData.competencyLevels[currentSelfRating] !== undefined ? 
+                            skillData.competencyLevels[currentSelfRating] : 
+                            'Select your current competency level'}
+                    </div>
+                </div>
+
+                <div class="assessment-block">
+                    <div class="assessment-label">Manager Assessment</div>
+                    <div class="level-selector">
+                        ${[0,1,2,3,4,5].map(level => `
+                            <button class="level-btn ${currentManagerRating === level ? 'active' : ''}" 
+                                    onclick="updateAssessment('${skillId}', 'manager', ${level})">${level}</button>
+                        `).join('')}
+                    </div>
+                    <div class="competency-description">
+                        ${skillData.competencyLevels && skillData.competencyLevels[currentManagerRating] !== undefined ? 
+                            skillData.competencyLevels[currentManagerRating] : 
+                            'Manager assessment pending'}
+                    </div>
+                </div>
+
+                ${requiredLevel > 0 && currentSelfRating >= 0 ? `
+                    <div class="gap-indicator ${gap > 0 ? 'negative' : ''}">
+                        <span class="gap-text">
+                            ${gap > 0 ? `📊 ${gap} level${gap > 1 ? 's' : ''} below requirement` : 
+                                gap === 0 ? '✅ Meets requirement' : 
+                                `🌟 ${Math.abs(gap)} level${Math.abs(gap) > 1 ? 's' : ''} above requirement`}
+                        </span>
+                    </div>
+                ` : ''}
+            </div>
+
+            <div class="notes-section">
+                <div class="notes-grid">
+                    <div class="note-block">
+                        <label class="note-label">Your Notes</label>
+                        <textarea class="note-textarea" 
+                                placeholder="Learning goals, experience, projects..."
+                                onchange="updateNote('${skillId}', 'employee', this.value)">${skillNotes[skillId]?.employee || ''}</textarea>
+                    </div>
+                    <div class="note-block">
+                        <label class="note-label">Manager Feedback</label>
+                        <textarea class="note-textarea" 
+                                placeholder="Feedback, recommendations, action items..."
+                                onchange="updateNote('${skillId}', 'manager', this.value)">${skillNotes[skillId]?.manager || ''}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function updateSummary() {
+    let totalSkillsCount = 0;
+    let totalSelfRatingSum = 0;
+    let totalManagerRatingSum = 0;
+    let selfRatedCount = 0;
+    let managerRatedCount = 0;
+
+    let developmentAreasCount = 0;
+    let strengthsCount = 0;
+    let roleReadinessCount = 0;
+    let totalRequiredSkillsForRole = 0;
+
+    Object.values(m365SkillsFramework).forEach(framework => {
+        Object.values(framework.categories).forEach(skills => {
+            skills.forEach(skillData => {
+                const skillId = skillData.id;
+                const selfLevel = assessmentData[skillId]?.self || 0;
+                const managerLevel = assessmentData[skillId]?.manager || 0;
+
+                if (selfLevel > 0 || managerLevel > 0) {
+                    totalSkillsCount++;
+                }
+                
+                if (selfLevel > 0) {
+                    totalSelfRatingSum += selfLevel;
+                    selfRatedCount++;
+                }
+                if (managerLevel > 0) {
+                    totalManagerRatingSum += managerLevel;
+                    managerRatedCount++;
+                }
+
+                // Logic for development areas and strengths based on current role
+                if (currentRole) {
+                    const requiredLevel = skillData.requirements[currentRole];
+                    if (requiredLevel !== undefined) {
+                        totalRequiredSkillsForRole++;
+                        if (selfLevel < requiredLevel) {
+                            developmentAreasCount++;
+                        }
+                        if (selfLevel >= 4) { // Level 4 and 5 are strengths
+                            strengthsCount++;
+                        }
+                        if (selfLevel >= requiredLevel) {
+                            roleReadinessCount++;
+                        }
+                    }
+                }
+            });
+        });
+    });
+
+    const avgSelfRating = selfRatedCount > 0 ? (totalSelfRatingSum / selfRatedCount).toFixed(1) : '0.0';
+    const avgManagerRating = managerRatedCount > 0 ? (totalManagerRatingSum / managerRatedCount).toFixed(1) : '0.0';
+    const readinessPercentage = totalRequiredSkillsForRole > 0 ? ((roleReadinessCount / totalRequiredSkillsForRole) * 100).toFixed(0) : '0';
+
+    document.getElementById('totalSkills').textContent = totalSkillsCount;
+    document.getElementById('avgSelfRating').textContent = avgSelfRating;
+    document.getElementById('avgManagerRating').textContent = avgManagerRating;
+    document.getElementById('developmentAreas').textContent = developmentAreasCount;
+    document.getElementById('strengths').textContent = strengthsCount;
+    document.getElementById('readiness').textContent = readinessPercentage + '%';
+}
+
+function updateAnalysis() {
+    updateGapAnalysis();
+    updateStrengthsAnalysis();
+    updateDevelopmentRoadmap();
+}
+
+function updateGapAnalysis() {
+    const gapAnalysisDiv = document.getElementById('gapAnalysis');
+    if (!currentRole) {
+        gapAnalysisDiv.innerHTML = 'Please select your current role to see gap analysis.';
+        return;
+    }
+
+    const gaps = [];
+    Object.values(m365SkillsFramework).forEach(framework => {
+        Object.values(framework.categories).forEach(skills => {
+            skills.forEach(skillData => {
+                const requiredLevel = skillData.requirements[currentRole];
+                if (requiredLevel !== undefined) {
+                    const skillId = skillData.id;
+                    const selfLevel = assessmentData[skillId]?.self || 0;
+                    const gap = requiredLevel - selfLevel;
+                    
+                    if (gap > 0) {
+                        gaps.push({
+                            skill: skillData.skill,
+                            gap: gap,
+                            required: requiredLevel,
+                            current: selfLevel,
+                            description: skillData.description
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+    if (gaps.length === 0) {
+        gapAnalysisDiv.innerHTML = `
+            <div style="color: #4caf50; font-weight: 600; padding: 20px; background: #e8f5e9; border-radius: 10px;">
+                🎉 Excellent! You meet or exceed all requirements for your current role.
+            </div>
+        `;
+        return;
+    }
+
+    gaps.sort((a, b) => b.gap - a.gap);
+
+    let content = '<div style="margin-bottom: 20px;">';
+    gaps.forEach((gap) => {
+        content += `
+            <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #f44336;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <strong style="color: #0078d4;">${gap.skill}</strong>
+                    <span style="background: #ffebee; color: #c62828; padding: 4px 12px; border-radius: 15px; font-size: 0.85em;">
+                        Gap: ${gap.gap} level${gap.gap > 1 ? 's' : ''}
+                    </span>
+                </div>
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">${gap.description}</div>
+                <div style="display: flex; gap: 15px; font-size: 0.85em;">
+                    <span>Current: ${gap.current}/5</span>
+                    <span>Required: ${gap.required}/5</span>
+                </div>
+            </div>
+        `;
+    });
+    content += '</div>';
+
+    gapAnalysisDiv.innerHTML = content;
+}
+
+function updateStrengthsAnalysis() {
+    const strengthsAnalysisDiv = document.getElementById('strengthsAnalysis');
+    const strengths = [];
+    
+    Object.values(m365SkillsFramework).forEach(framework => {
+        Object.values(framework.categories).forEach(skills => {
+            skills.forEach(skillData => {
+                const skillId = skillData.id;
+                const selfLevel = assessmentData[skillId]?.self || 0;
+                
+                if (selfLevel >= 4) { // Defined as a strength if self-rated 4 or 5
+                    strengths.push({
+                        skill: skillData.skill,
+                        level: selfLevel,
+                        description: skillData.description
+                    });
+                }
+            });
+        });
+    });
+
+    if (strengths.length === 0) {
+        strengthsAnalysisDiv.innerHTML = 'Complete your assessment to identify key strengths.';
+        return;
+    }
+
+    strengths.sort((a, b) => b.level - a.level); // Sort by highest level first
+
+    let content = '<div>';
+    strengths.forEach(strength => {
+        content += `
+            <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #4caf50;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <strong style="color: #0078d4;">${strength.skill}</strong>
+                    <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 15px; font-size: 0.85em; font-weight: 600;">
+                        Level ${strength.level}/5
+                    </span>
+                </div>
+                <div style="color: #666; font-size: 0.9em;">${strength.description}</div>
+            </div>
+        `;
+    });
+    content += '</div>';
+
+    strengthsAnalysisDiv.innerHTML = content;
+}
+
+function updateDevelopmentRoadmap() {
+    const developmentRoadmapDiv = document.getElementById('developmentRoadmap');
+    if (!careerGoal) {
+        developmentRoadmapDiv.innerHTML = 'Select your career goal to see your personalized development roadmap.';
+        return;
+    }
+
+    const roadmapItems = [];
+    
+    Object.values(m365SkillsFramework).forEach(framework => {
+        Object.values(framework.categories).forEach(skills => {
+            skills.forEach(skillData => {
+                const targetLevel = skillData.requirements[careerGoal];
+                if (targetLevel !== undefined) {
+                    const skillId = skillData.id;
+                    const currentLevel = assessmentData[skillId]?.self || 0;
+                    const gap = targetLevel - currentLevel;
+                    
+                    if (gap > 0) {
+                        roadmapItems.push({
+                            skill: skillData.skill,
+                            gap: gap,
+                            current: currentLevel,
+                            target: targetLevel,
+                            certifications: skillData.certifications || []
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+    if (roadmapItems.length === 0) {
+        developmentRoadmapDiv.innerHTML = `
+            <div style="color: #4caf50; font-weight: 600; padding: 20px; background: #e8f5e9; border-radius: 10px;">
+                🎉 You already meet all requirements for your target role!
+            </div>
+        `;
+        return;
+    }
+
+    roadmapItems.sort((a, b) => b.gap - a.gap);
+
+    let content = `
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: #0078d4; margin-bottom: 15px;">Skills to develop for ${careerGoal.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
+        `;
+    
+    roadmapItems.forEach((item) => {
+        const priority = item.gap >= 3 ? 'High' : item.gap >= 2 ? 'Medium' : 'Low';
+        const priorityColor = item.gap >= 3 ? '#f44336' : item.gap >= 2 ? '#ff9800' : '#ffc107';
+        
+        content += `
+            <div style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid ${priorityColor};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <strong style="color: #0078d4;">${item.skill}</strong>
+                    <span style="background: #f5f5f5; color: ${priorityColor}; padding: 4px 12px; border-radius: 15px; font-size: 0.85em; font-weight: 600;">
+                        ${priority} Priority
+                    </span>
+                </div>
+                <div style="display: flex; gap: 20px; font-size: 0.9em; color: #666;">
+                    <span>Current: ${item.current}/5</span>
+                    <span>Target: ${item.target}/5</span>
+                    <span>Gap: ${item.gap} level${item.gap > 1 ? 's' : ''}</span>
+                </div>
+                ${item.certifications.length > 0 ? `
+                    <div style="margin-top: 10px;">
+                        <span style="font-size: 0.85em; color: #666;">Recommended certifications:</span>
+                        ${item.certifications.map(cert => `
+                            <span style="background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; margin-left: 5px;">
+                                ${cert}
+                            </span>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    });
+    
+    content += '</div>';
+    developmentRoadmapDiv.innerHTML = content;
+}
+
+function generateDetailedReport() {
+    const employeeName = document.getElementById('employeeName').value || 'Employee';
+    const managerName = document.getElementById('managerName').value || 'Manager';
+    const department = document.getElementById('department').value || 'Department';
+    
+    let report = `MICROSOFT 365 STACK SKILLS ASSESSMENT REPORT\n`;
+    report += `${'='.repeat(50)}\n\n`;
+    report += `Employee: ${employeeName}\n`;
+    report += `Manager: ${managerName}\n`;
+    report += `Department: ${department}\n`;
+    report += `Current Role: ${currentRole ? currentRole.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Not specified'}\n`;
+    report += `Career Goal: ${careerGoal ? careerGoal.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Not specified'}\n`;
+    report += `Assessment Date: ${document.getElementById('assessmentDate').value}\n\n`;
+
+    // Executive Summary
+    let totalSkillsAssessedForSummary = 0;
+    let totalSelfRatingSumSummary = 0;
+    let totalManagerRatingSumSummary = 0;
+
+    Object.values(m365SkillsFramework).forEach(framework => {
+        Object.values(framework.categories).forEach(skills => {
+            skills.forEach(skillData => {
+                const skillId = skillData.id;
+                const selfLevel = assessmentData[skillId]?.self || 0;
+                const managerLevel = assessmentData[skillId]?.manager || 0;
+
+                if (selfLevel > 0 || managerLevel > 0) {
+                    totalSkillsAssessedForSummary++;
+                    totalSelfRatingSumSummary += selfLevel;
+                    totalManagerRatingSumSummary += managerLevel;
+                }
+            });
+        });
+    });
+
+    const avgSelfRatingSummary = totalSkillsAssessedForSummary > 0 ? (totalSelfRatingSumSummary / totalSkillsAssessedForSummary).toFixed(1) : '0.0';
+    const avgManagerRatingSummary = totalSkillsAssessedForSummary > 0 ? (totalManagerRatingSumSummary / totalSkillsAssessedForSummary).toFixed(1) : '0.0';
+
+    report += `EXECUTIVE SUMMARY\n`;
+    report += `${'-'.repeat(20)}\n`;
+    report += `Total Skills Assessed: ${totalSkillsAssessedForSummary}\n`;
+    report += `Average Self-Rating: ${avgSelfRatingSummary}/5.0\n`;
+    report += `Average Manager Rating: ${avgManagerRatingSummary}/5.0\n`;
+    report += `Development Areas Identified: ${document.getElementById('developmentAreas').textContent}\n`;
+    report += `Key Strengths Identified: ${document.getElementById('strengths').textContent}\n`;
+    report += `Current Role Readiness: ${document.getElementById('readiness').textContent}\n\n`;
+
+    // Detailed Skills Assessment
+    Object.entries(m365SkillsFramework).forEach(([categoryKey, framework]) => {
+        report += `\n${framework.title.toUpperCase()}\n`;
+        report += `${'-'.repeat(framework.title.length)}\n`;
+        
+        Object.entries(framework.categories).forEach(([subcategoryName, skills]) => {
+            report += `\n${subcategoryName}:\n`;
+            skills.forEach(skillData => {
+                const skillId = skillData.id;
+                const selfLevel = assessmentData[skillId]?.self || 0;
+                const managerLevel = assessmentData[skillId]?.manager || 0;
+                const requiredLevel = currentRole ? (skillData.requirements[currentRole] || 0) : 0;
+                const gap = requiredLevel - selfLevel;
+
+                // Only include skills that have been rated or have a requirement for the current role
+                if (selfLevel > 0 || managerLevel > 0 || requiredLevel > 0) {
+                    report += `• ${skillData.skill}\n`;
+                    report += `  Description: ${skillData.description}\n`;
+                    report += `  Self Rating: ${selfLevel}/5\n`;
+                    report += `  Manager Rating: ${managerLevel}/5\n`;
+                    if (currentRole && requiredLevel > 0) {
+                         report += `  Required for Current Role: ${requiredLevel}/5\n`;
+                         report += `  Gap: ${gap > 0 ? gap + ' levels below' : (gap === 0 ? 'Meets requirement' : Math.abs(gap) + ' levels above')}\n`;
+                    }
+                    if (skillData.certifications && skillData.certifications.length > 0) {
+                        report += `  Certifications: ${skillData.certifications.join(', ')}\n`;
+                    }
+                    if (skillNotes[skillId]?.employee) {
+                        report += `  Your Notes: ${skillNotes[skillId].employee}\n`;
+                    }
+                    if (skillNotes[skillId]?.manager) {
+                        report += `  Manager Feedback: ${skillNotes[skillId].manager}\n`;
+                    }
+                    report += '\n';
+                }
+            });
+        });
+    });
+
+    // Download report
+    const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${employeeName.replace(/\s+/g, '_')}_M365_Skills_Assessment.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
+function saveAssessment() {
+    const employeeName = document.getElementById('employeeName').value;
+    if (!employeeName) {
+        alert('Please enter your name before saving.');
+        return;
+    }
+
+    const assessmentSummary = {
+        employeeName,
+        managerName: document.getElementById('managerName').value,
+        department: document.getElementById('department').value,
+        currentRole: currentRole,
+        careerGoal: careerGoal,
+        assessmentDate: document.getElementById('assessmentDate').value,
+        assessmentData: assessmentData,
+        skillNotes: skillNotes,
+        timestamp: new Date().toISOString()
+    };
+
+    try {
+        localStorage.setItem(`m365_assessment_${employeeName.replace(/\s+/g, '_')}`, JSON.stringify(assessmentSummary));
+        alert('Assessment saved successfully!');
+    } catch (e) {
+        console.error("Error saving to localStorage:", e);
+        alert("Failed to save assessment. Local storage might be full or inaccessible.");
+    }
+}
+
+function exportToPDF() {
+    alert('PDF export would require a PDF library. For now, use the Generate Full Report button to download a text report.');
+}
+
+// Initialize the assessment when page loads
+window.addEventListener('DOMContentLoaded', initializeAssessment);
+    </script>
+</body>
+</html>
